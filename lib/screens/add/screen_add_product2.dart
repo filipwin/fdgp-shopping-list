@@ -34,20 +34,6 @@ class _State2 extends AddScreenStateContract {
   }
 
   @override
-  Widget buttonsSection() {
-    return Padding(
-      padding: largerTopInsets,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          cancelButton(context),
-          addButton(context),
-        ],
-      ),
-    );
-  }
-
-  @override
   Widget cancelButton(BuildContext context) {
     return CupertinoButton(
       child: Text(cancelButtonText),
