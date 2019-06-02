@@ -23,6 +23,5 @@ class AdaptiveFab extends AdaptiveWidget<FloatingActionButton, Widget> {
       child: materialChild,
       onPressed: () => materialOnPressed,
     );
-    ;
   }
 }

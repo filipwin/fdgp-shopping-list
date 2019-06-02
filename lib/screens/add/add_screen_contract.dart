@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:platformfriendlyappv2/controllers/switch_controller.dart';
 import 'package:platformfriendlyappv2/model/product.dart';
 import 'package:platformfriendlyappv2/utils/util.dart';
 
@@ -10,11 +9,13 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
   final nameHint = 'Name';
   final priceHint = 'Price';
   final quantityHint = 'Quantity';
+  final switchLabel = 'Is priority';
 
   final screenTitle = 'Add product';
   final addButtonText = 'Add';
   final cancelButtonText = 'Cancel';
   double sliderValue = 0.25;
+  bool switchValue = false;
   final standardInsets = EdgeInsets.fromLTRB(16, 8, 16, 8);
   final largerTopInsets = EdgeInsets.fromLTRB(16, 16, 16, 8);
 
@@ -22,7 +23,6 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
-  final SwitchController switchController = SwitchController();
 
   Widget appBar();
   Widget nameField();
@@ -33,6 +33,26 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
   Widget cancelButton(BuildContext context);
   Widget isPrioritySwitch();
   Widget uselessSlider();
+  Widget buttonsSection();
+
+  Widget scaffoldBody() {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          nameField(),
+          quantityField(),
+          priceField(),
+          vatPercentagePicker(),
+          isPrioritySwitch(),
+          uselessSlider(),
+          buttonsSection(),
+        ],
+      ),
+    );
+  }
 
   void cancelClick(BuildContext context) {
     Navigator.of(context).pop();
@@ -45,7 +65,7 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
   Product productFromInput() {
     final name = nameController.text.toString();
     final quantity = num.tryParse(quantityController.text.toString()) ?? 1;
-    final isPriority = switchController.value;
+    final isPriority = switchValue;
     final price = num.parse(priceController.text.toString());
     final vatValue = Util.percentageToNum(vatValueController.text.toString());
     return Product(name, quantity, isPriority, price, vatValue);

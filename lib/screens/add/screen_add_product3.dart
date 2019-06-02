@@ -67,4 +67,10 @@ class _State3 extends AddScreenStateContract {
     // TODO: implement vatPercentagePicker
     return null;
   }
+
+  @override
+  Widget buttonsSection() {
+    // TODO: implement buttonsSection
+    return null;
+  }
 }

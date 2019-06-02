@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:platformfriendlyappv2/screens/add/add_screen_contract.dart';
-import 'package:platformfriendlyappv2/widgets/stateful_switch.dart';
 import 'package:platformfriendlyappv2/widgets/vat_dropdown.dart';
 
 class AddProductScreen1 extends AddScreenContract {
@@ -14,27 +13,17 @@ class _State1 extends AddScreenStateContract {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            nameField(),
-            quantityField(),
-            priceField(),
-            vatPercentagePicker(),
-            isPrioritySwitch(),
-            uselessSlider(),
-            ButtonBar(
-              children: <Widget>[
-                cancelButton(context),
-                addButton(context),
-              ],
-            )
-          ],
-        ),
-      ),
+      body: scaffoldBody(),
+    );
+  }
+
+  @override
+  Widget buttonsSection() {
+    return ButtonBar(
+      children: <Widget>[
+        cancelButton(context),
+        addButton(context),
+      ],
     );
   }
 
@@ -110,15 +99,21 @@ class _State1 extends AddScreenStateContract {
   Widget isPrioritySwitch() {
     return Padding(
       padding: standardInsets,
-      child: StatefulSwitch(
-        controller: switchController,
+      child: SwitchListTile.adaptive(
+        value: switchValue,
+        onChanged: (newValue) {
+          setState(() {
+            switchValue = newValue;
+          });
+        },
+        title: Text(switchLabel),
       ),
     );
   }
 
   @override
   Widget uselessSlider() {
-    Slider.adaptive(
+    return Slider.adaptive(
       value: sliderValue,
       onChanged: (newValue) => print,
     );

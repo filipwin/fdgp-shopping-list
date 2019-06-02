@@ -8,6 +8,15 @@ class AddProductScreen2 extends AddScreenContract {
 
 class _State2 extends AddScreenStateContract {
   bool _switchValue = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: appBar(),
+      child: scaffoldBody(),
+    );
+  }
+
   @override
   Widget addButton(BuildContext context) {
     return CupertinoButton.filled(
@@ -25,33 +34,15 @@ class _State2 extends AddScreenStateContract {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: appBar(),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            nameField(),
-            priceField(),
-            quantityField(),
-            vatPercentagePicker(),
-            isPrioritySwitch(),
-            uselessSlider(),
-            Padding(
-              padding: largerTopInsets,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  cancelButton(context),
-                  addButton(context),
-                ],
-              ),
-            )
-          ],
-        ),
+  Widget buttonsSection() {
+    return Padding(
+      padding: largerTopInsets,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          cancelButton(context),
+          addButton(context),
+        ],
       ),
     );
   }
@@ -70,14 +61,15 @@ class _State2 extends AddScreenStateContract {
       padding: standardInsets,
       child: Row(
         children: <Widget>[
-          Text('Is priority'),
+          Text(switchLabel),
           Padding(
             padding: standardInsets,
             child: CupertinoSwitch(
-                value: _switchValue,
-                onChanged: (newValue) => setState(() {
-                      _switchValue = newValue;
-                    })),
+              value: _switchValue,
+              onChanged: (newValue) => setState(() {
+                    _switchValue = newValue;
+                  }),
+            ),
           ),
         ],
       ),
