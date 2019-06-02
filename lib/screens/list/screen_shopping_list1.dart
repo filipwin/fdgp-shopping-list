@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:platformfriendlyappv2/model/product.dart';
-import 'package:platformfriendlyappv2/prefs/prefs.dart';
 import 'package:platformfriendlyappv2/screens/add/screen_add_product1.dart';
 import 'package:platformfriendlyappv2/screens/list/shopping_screen_contract.dart';
-import 'package:platformfriendlyappv2/utils/util.dart';
 
 ///No platform-friendly approach. Just clean Material layout.
 class ShoppingListScreen1 extends ShoppingScreenContract {
@@ -29,26 +27,6 @@ class _State1 extends ShoppingScreenStateContract {
   }
 
   @override
-  Widget scaffoldBody() {
-    return Container(
-      color: Color.fromRGBO(220, 220, 220, 1.0),
-      child: FutureBuilder(
-        future: Prefs.loadProducts(delay: 2),
-        builder: (c, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done)
-            return Center(child: CircularProgressIndicator());
-          else {
-            if (snapshot.hasData && !snapshot.hasError)
-              return productList(Util.transformProducts(snapshot.data));
-            else
-              return Container();
-          }
-        },
-      ),
-    );
-  }
-
-  @override
   Widget productListItem(Product product) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -70,54 +48,28 @@ class _State1 extends ShoppingScreenStateContract {
   }
 
   @override
-  Widget productListItemContent(Product product) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                '${product.name} x ${product.quantity}',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
-              ),
-              Text(product.price.toStringAsFixed(2)),
-            ],
-          ),
-          GestureDetector(
-            child: Icon(
-              Icons.clear,
-              size: 36,
-              color: Colors.red,
-            ),
-            onTap: () => onDeleteProduct(product),
-          ),
-        ],
+  Widget deleteProductButton(Product product) {
+    return GestureDetector(
+      child: Icon(
+        Icons.clear,
+        size: 36,
+        color: Colors.red,
       ),
+      onTap: () => onDeleteProduct(product),
     );
   }
 
   @override
   Widget addProductButton(BuildContext context) {
     return FloatingActionButton(
-      child: Text('Add'),
+      child: Text(addProductButtonText),
       onPressed: () => onAddProductClicked(context),
     );
   }
 
   @override
-  void onAddProductClicked(BuildContext context) async {
-    final createdProduct = await Navigator.of(context).push(
-      MaterialPageRoute<Product>(
-        builder: (c) => AddProductScreen1(),
-      ),
-    );
+  Route<Product> onAddProductRoute() => MaterialPageRoute(builder: (c) => AddProductScreen1());
 
-    if (createdProduct != null) {
-      await Prefs.saveProduct(createdProduct);
-      setState(() {});
-    }
-  }
+  @override
+  Widget listLoader() => CircularProgressIndicator();
 }
