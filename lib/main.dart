@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:platformfriendlyappv2/screens/list/screen_shopping_list1.dart';
+import 'package:platformfriendlyappv2/screens/list/screen_shopping_list2.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +11,7 @@ class MyApp extends StatelessWidget {
   ///2 - cupertino only
   ///3 - platform-aware custom
   ///4 - PlatformWidgets lib
-  final mode = 1;
+  final mode = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +24,21 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _pickApp({String title, ThemeData theme}) {
+    final cupertinoTheme = CupertinoThemeData(primaryColor: theme.primaryColor);
+
     switch (mode) {
       case 1:
         return MaterialApp(
           title: title,
           theme: theme,
+          debugShowCheckedModeBanner: false,
+          home: _pickScreen(mode),
+        );
+      case 2:
+        return CupertinoApp(
+          title: title,
+          theme: cupertinoTheme,
+          debugShowCheckedModeBanner: false,
           home: _pickScreen(mode),
         );
     }
@@ -36,6 +48,8 @@ class MyApp extends StatelessWidget {
     switch (index) {
       case 1:
         return ShoppingListScreen1();
+      case 2:
+        return ShoppingListScreen2();
       default:
         return ShoppingListScreen1();
     }

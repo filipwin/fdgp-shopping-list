@@ -5,7 +5,7 @@ import 'package:platformfriendlyappv2/screens/add/screen_add_product1.dart';
 import 'package:platformfriendlyappv2/screens/list/shopping_screen_contract.dart';
 import 'package:platformfriendlyappv2/utils/util.dart';
 
-///No platform-friendly approach. Just clear Material layout.
+///No platform-friendly approach. Just clean Material layout.
 class ShoppingListScreen1 extends ShoppingScreenContract {
   @override
   State<StatefulWidget> createState() => _State1();
@@ -17,14 +17,14 @@ class _State1 extends ShoppingScreenStateContract {
     return Scaffold(
       appBar: appBar(),
       body: scaffoldBody(),
-      floatingActionButton: fab(context),
+      floatingActionButton: addProductButton(context),
     );
   }
 
   @override
   Widget appBar() {
     return AppBar(
-      title: Text('Shopping list'),
+      title: Text(screenTitle),
     );
   }
 
@@ -33,7 +33,7 @@ class _State1 extends ShoppingScreenStateContract {
     return Container(
       color: Color.fromRGBO(220, 220, 220, 1.0),
       child: FutureBuilder(
-        future: Prefs.loadProducts(),
+        future: Prefs.loadProducts(delay: 2),
         builder: (c, snapshot) {
           if (snapshot.connectionState != ConnectionState.done)
             return Center(child: CircularProgressIndicator());
@@ -45,14 +45,6 @@ class _State1 extends ShoppingScreenStateContract {
           }
         },
       ),
-    );
-  }
-
-  @override
-  Widget productList(List<Product> products) {
-    return ListView.builder(
-      itemCount: products.length,
-      itemBuilder: (c, index) => productListItem(products[index]),
     );
   }
 
@@ -108,22 +100,15 @@ class _State1 extends ShoppingScreenStateContract {
   }
 
   @override
-  Widget fab(BuildContext context) {
+  Widget addProductButton(BuildContext context) {
     return FloatingActionButton(
       child: Text('Add'),
-      onPressed: () => onFabPressed(context),
+      onPressed: () => onAddProductClicked(context),
     );
   }
 
   @override
-  void onDeleteProduct(Product product) {
-    Prefs.deleteProduct(product.name).then((result) {
-      setState(() {});
-    });
-  }
-
-  @override
-  void onFabPressed(BuildContext context) async {
+  void onAddProductClicked(BuildContext context) async {
     final createdProduct = await Navigator.of(context).push(
       MaterialPageRoute<Product>(
         builder: (c) => AddProductScreen1(),

@@ -4,6 +4,8 @@ import 'package:platformfriendlyappv2/model/product.dart';
 import 'package:platformfriendlyappv2/utils/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+///Ugly as hell class handling product persistence.
+///Should be non-static and probably injected.
 class Prefs {
   static final _key = "products";
 
@@ -18,10 +20,11 @@ class Prefs {
     prefs.setStringList(_key, products.map((it) => jsonEncode(it.toJson())).toList());
   }
 
-  static Future<List<String>> loadProducts() async {
+  ///Load products. Artificial delay can be added to give loader a chance to appear.
+  static Future<List<String>> loadProducts({int delay = 0}) async {
     final prefs = await SharedPreferences.getInstance();
     final products = prefs.getStringList(_key);
-    return products;
+    return Future.delayed(Duration(seconds: delay), () => products);
   }
 
   static Future<void> deleteProduct(String name) async {

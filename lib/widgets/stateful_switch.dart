@@ -13,14 +13,14 @@ class StatefulSwitch extends StatefulWidget {
 class _State extends State<StatefulSwitch> {
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
+    return SwitchListTile.adaptive(
       value: widget.controller.value,
       onChanged: (newValue) {
         setState(() {
           widget.controller.value = newValue;
         });
       },
-      title: Text('Is bought'),
+      title: Text('Is priority'),
     );
   }
 }
