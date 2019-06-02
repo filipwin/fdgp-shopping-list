@@ -42,62 +42,47 @@ class _State1 extends AddScreenStateContract {
 
   @override
   Widget nameField() {
-    return Padding(
-      padding: largerTopInsets,
-      child: TextFormField(
-        controller: nameController,
-        decoration: InputDecoration(labelText: nameHint),
-      ),
+    return TextFormField(
+      controller: nameController,
+      decoration: InputDecoration(labelText: nameHint),
     );
   }
 
   @override
   Widget priceField() {
-    return Padding(
-      padding: standardInsets,
-      child: TextFormField(
-        controller: priceController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(labelText: priceHint),
-      ),
+    return TextFormField(
+      controller: priceController,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(labelText: priceHint),
     );
   }
 
   @override
   Widget quantityField() {
-    return Padding(
-      padding: standardInsets,
-      child: TextFormField(
-        controller: quantityController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(labelText: quantityHint),
-      ),
+    return TextFormField(
+      controller: quantityController,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(labelText: quantityHint),
     );
   }
 
   @override
   Widget vatPercentagePicker() {
-    return Padding(
-      padding: standardInsets,
-      child: VatDropdown(
-        controller: vatValueController,
-      ),
+    return VatDropdown(
+      controller: vatValueController,
     );
   }
 
   @override
   Widget isPrioritySwitch() {
-    return Padding(
-      padding: standardInsets,
-      child: SwitchListTile.adaptive(
-        value: switchValue,
-        onChanged: (newValue) {
-          setState(() {
-            switchValue = newValue;
-          });
-        },
-        title: Text(switchLabel),
-      ),
+    return SwitchListTile.adaptive(
+      value: switchValue,
+      onChanged: (newValue) {
+        setState(() {
+          switchValue = newValue;
+        });
+      },
+      title: Text(switchLabel),
     );
   }
 

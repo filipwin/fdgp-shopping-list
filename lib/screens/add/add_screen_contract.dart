@@ -41,13 +41,13 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          nameField(),
-          quantityField(),
-          priceField(),
-          vatPercentagePicker(),
-          isPrioritySwitch(),
-          uselessSlider(),
-          buttonsSection(),
+          Padding(padding: largerTopInsets, child: nameField()),
+          Padding(padding: standardInsets, child: quantityField()),
+          Padding(padding: standardInsets, child: priceField()),
+          Padding(padding: standardInsets, child: vatPercentagePicker()),
+          Padding(padding: standardInsets, child: isPrioritySwitch()),
+          Padding(padding: standardInsets, child: uselessSlider()),
+          Padding(padding: largerTopInsets, child: buttonsSection()),
         ],
       ),
     );
@@ -71,15 +71,12 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
   }
 
   Widget buttonsSection() {
-    return Padding(
-      padding: largerTopInsets,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          cancelButton(context),
-          addButton(context),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        cancelButton(context),
+        addButton(context),
+      ],
     );
   }
 }

@@ -43,68 +43,53 @@ class _State2 extends AddScreenStateContract {
 
   @override
   Widget isPrioritySwitch() {
-    return Padding(
-      padding: standardInsets,
-      child: Row(
-        children: <Widget>[
-          Text(switchLabel),
-          Padding(
-            padding: standardInsets,
-            child: CupertinoSwitch(
-              value: _switchValue,
-              onChanged: (newValue) => setState(() {
-                    _switchValue = newValue;
-                  }),
-            ),
+    return Row(
+      children: <Widget>[
+        Text(switchLabel),
+        Padding(
+          padding: standardInsets,
+          child: CupertinoSwitch(
+            value: _switchValue,
+            onChanged: (newValue) => setState(() {
+                  _switchValue = newValue;
+                }),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   @override
   Widget nameField() {
-    return Padding(
-      padding: largerTopInsets,
-      child: CupertinoTextField(
-        controller: nameController,
-        placeholder: nameHint,
-      ),
+    return CupertinoTextField(
+      controller: nameController,
+      placeholder: nameHint,
     );
   }
 
   @override
   Widget priceField() {
-    return Padding(
-      padding: standardInsets,
-      child: CupertinoTextField(
-        controller: priceController,
-        placeholder: priceHint,
-        keyboardType: TextInputType.number,
-      ),
+    return CupertinoTextField(
+      controller: priceController,
+      placeholder: priceHint,
+      keyboardType: TextInputType.number,
     );
   }
 
   @override
   Widget quantityField() {
-    return Padding(
-      padding: standardInsets,
-      child: CupertinoTextField(
-        controller: quantityController,
-        placeholder: quantityHint,
-        keyboardType: TextInputType.number,
-      ),
+    return CupertinoTextField(
+      controller: quantityController,
+      placeholder: quantityHint,
+      keyboardType: TextInputType.number,
     );
   }
 
   @override
   Widget vatPercentagePicker() {
-    return Padding(
-      padding: standardInsets,
-      child: CupertinoButton(
-        child: Text('VAT value: ${vatValueController.text}'),
-        onPressed: showPicker,
-      ),
+    return CupertinoButton(
+      child: Text('VAT value: ${vatValueController.text}'),
+      onPressed: showPicker,
     );
   }
 
@@ -135,21 +120,18 @@ class _State2 extends AddScreenStateContract {
 
   @override
   Widget uselessSlider() {
-    return Padding(
-      padding: standardInsets,
-      child: Row(
-        children: <Widget>[
-          Text(sliderLabel),
-          CupertinoSlider(
-            value: sliderValue,
-            onChanged: (newValue) => setState(
-                  () {
-                    sliderValue = newValue;
-                  },
-                ),
-          ),
-        ],
-      ),
+    return Row(
+      children: <Widget>[
+        Text(sliderLabel),
+        CupertinoSlider(
+          value: sliderValue,
+          onChanged: (newValue) => setState(
+                () {
+                  sliderValue = newValue;
+                },
+              ),
+        ),
+      ],
     );
   }
 }
