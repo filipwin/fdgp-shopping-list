@@ -1,4 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:platformfriendlyappv2/widgets/adaptive_button.dart';
+import 'package:platformfriendlyappv2/widgets/adaptive_scaffold.dart';
+import 'package:platformfriendlyappv2/widgets/adaptive_top_bar.dart';
 
 import 'add_screen_contract.dart';
 
@@ -10,32 +14,51 @@ class AddProductScreen3 extends AddScreenContract {
 class _State3 extends AddScreenStateContract {
   @override
   Widget addButton(BuildContext context) {
-    // TODO: implement addButton
-    return null;
+    return AdaptiveButton(
+      cupertinoIsFilled: true,
+      child: Text(addButtonText),
+      onClick: () => okClick(context),
+    );
   }
 
   @override
   Widget appBar() {
-    // TODO: implement appBar
-    return null;
+    return AdaptiveTopBar(
+      title: Text(screenTitle),
+      cupertinoBackgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return AdaptiveScaffold(
+      topBar: appBar(),
+      body: scaffoldBody(),
+    );
   }
 
   @override
   Widget cancelButton(BuildContext context) {
-    // TODO: implement cancelButton
-    return null;
+    return AdaptiveButton(
+      child: Text(cancelButtonText),
+      onClick: () => cancelClick(context),
+    );
   }
 
   @override
   Widget isPrioritySwitch() {
-    // TODO: implement isPrioritySwitch
-    return null;
+    return Padding(
+      padding: standardInsets,
+      child: SwitchListTile.adaptive(
+        value: switchValue,
+        onChanged: (newValue) {
+          setState(() {
+            switchValue = newValue;
+          });
+        },
+        title: Text(switchLabel),
+      ),
+    );
   }
 
   @override
@@ -58,19 +81,15 @@ class _State3 extends AddScreenStateContract {
 
   @override
   Widget uselessSlider() {
-    // TODO: implement uselessSlider
-    return null;
+    return Slider.adaptive(
+      value: sliderValue,
+      onChanged: (newValue) => print,
+    );
   }
 
   @override
   Widget vatPercentagePicker() {
     // TODO: implement vatPercentagePicker
-    return null;
-  }
-
-  @override
-  Widget buttonsSection() {
-    // TODO: implement buttonsSection
     return null;
   }
 }

@@ -18,16 +18,6 @@ class _State1 extends AddScreenStateContract {
   }
 
   @override
-  Widget buttonsSection() {
-    return ButtonBar(
-      children: <Widget>[
-        cancelButton(context),
-        addButton(context),
-      ],
-    );
-  }
-
-  @override
   Widget addButton(BuildContext context) {
     return FlatButton(
       onPressed: () => okClick(context),

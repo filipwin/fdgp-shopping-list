@@ -33,7 +33,6 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
   Widget cancelButton(BuildContext context);
   Widget isPrioritySwitch();
   Widget uselessSlider();
-  Widget buttonsSection();
 
   Widget scaffoldBody() {
     return SingleChildScrollView(
@@ -69,5 +68,18 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
     final price = num.parse(priceController.text.toString());
     final vatValue = Util.percentageToNum(vatValueController.text.toString());
     return Product(name, quantity, isPriority, price, vatValue);
+  }
+
+  Widget buttonsSection() {
+    return Padding(
+      padding: largerTopInsets,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          cancelButton(context),
+          addButton(context),
+        ],
+      ),
+    );
   }
 }
