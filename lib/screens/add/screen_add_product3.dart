@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:platformfriendlyappv2/widgets/adaptive_button.dart';
 import 'package:platformfriendlyappv2/widgets/adaptive_scaffold.dart';
+import 'package:platformfriendlyappv2/widgets/adaptive_slider.dart';
+import 'package:platformfriendlyappv2/widgets/adaptive_switch_tile.dart';
+import 'package:platformfriendlyappv2/widgets/adaptive_text_field.dart';
 import 'package:platformfriendlyappv2/widgets/adaptive_top_bar.dart';
+import 'package:platformfriendlyappv2/widgets/adaptive_vat_dropdown.dart';
 
 import 'add_screen_contract.dart';
 
@@ -47,49 +51,71 @@ class _State3 extends AddScreenStateContract {
 
   @override
   Widget isPrioritySwitch() {
-    return Padding(
-      padding: standardInsets,
-      child: SwitchListTile.adaptive(
-        value: switchValue,
-        onChanged: (newValue) {
-          setState(() {
-            switchValue = newValue;
-          });
-        },
-        title: Text(switchLabel),
-      ),
+    return AdaptiveSwitchTile(
+      switchLabel: switchLabel,
+      value: switchValue,
+      onChanged: (newValue) {
+        setState(() {
+          switchValue = newValue;
+        });
+      },
     );
   }
 
   @override
   Widget nameField() {
-    // TODO: implement nameField
-    return null;
+    return AdaptiveTextField(
+      controller: nameController,
+      hintText: nameHint,
+    );
   }
 
   @override
   Widget priceField() {
-    // TODO: implement priceField
-    return null;
+    return AdaptiveTextField(
+      controller: priceController,
+      hintText: priceHint,
+      keyboardType: TextInputType.number,
+    );
   }
 
   @override
   Widget quantityField() {
-    // TODO: implement quantityField
-    return null;
+    return AdaptiveTextField(
+      controller: quantityController,
+      hintText: quantityHint,
+      keyboardType: TextInputType.number,
+    );
   }
 
   @override
   Widget uselessSlider() {
-    return Slider.adaptive(
+    return AdaptiveSlider(
       value: sliderValue,
-      onChanged: (newValue) => print,
+      onChanged: (newValue) {
+        setState(() {
+          sliderValue = newValue;
+        });
+      },
     );
   }
 
   @override
   Widget vatPercentagePicker() {
-    // TODO: implement vatPercentagePicker
-    return null;
+    return AdaptiveVatDropdown(
+      materialValueController: vatValueController,
+      cupertinoContext: context,
+      cupertinoSpinnerHeight: 200,
+      cupertinoSpinnerItems: <Widget>[
+        Text(vatValues[0]),
+        Text(vatValues[1]),
+        Text(vatValues[2]),
+      ],
+      onItemSelected: (int index) {
+        setState(() {
+          vatValueController.text = vatValues[index];
+        });
+      },
+    );
   }
 }

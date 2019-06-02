@@ -7,8 +7,6 @@ class AddProductScreen2 extends AddScreenContract {
 }
 
 class _State2 extends AddScreenStateContract {
-  bool _switchValue = false;
-
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -49,9 +47,9 @@ class _State2 extends AddScreenStateContract {
         Padding(
           padding: standardInsets,
           child: CupertinoSwitch(
-            value: _switchValue,
+            value: switchValue,
             onChanged: (newValue) => setState(() {
-                  _switchValue = newValue;
+                  switchValue = newValue;
                 }),
           ),
         ),
@@ -94,7 +92,6 @@ class _State2 extends AddScreenStateContract {
   }
 
   void showPicker() {
-    final values = ['0%', '8%', '23%'];
     showCupertinoModalPopup(
       context: context,
       builder: (c) {
@@ -103,13 +100,13 @@ class _State2 extends AddScreenStateContract {
           child: CupertinoPicker(
             itemExtent: 30,
             children: <Widget>[
-              Text(values[0]),
-              Text(values[1]),
-              Text(values[2]),
+              Text(vatValues[0]),
+              Text(vatValues[1]),
+              Text(vatValues[2]),
             ],
             onSelectedItemChanged: (int index) {
               setState(() {
-                vatValueController.text = values[index];
+                vatValueController.text = vatValues[index];
               });
             },
           ),
@@ -120,18 +117,13 @@ class _State2 extends AddScreenStateContract {
 
   @override
   Widget uselessSlider() {
-    return Row(
-      children: <Widget>[
-        Text(sliderLabel),
-        CupertinoSlider(
-          value: sliderValue,
-          onChanged: (newValue) => setState(
-                () {
-                  sliderValue = newValue;
-                },
-              ),
-        ),
-      ],
+    return CupertinoSlider(
+      value: sliderValue,
+      onChanged: (newValue) => setState(
+            () {
+              sliderValue = newValue;
+            },
+          ),
     );
   }
 }

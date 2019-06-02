@@ -8,6 +8,7 @@ class AdaptiveIconButton extends AdaptiveWidget<Widget, Widget> {
   final Color materialColor;
   final Color cupertinoColor;
   final Function onClick;
+  final double size;
 
   AdaptiveIconButton({
     this.materialIcon,
@@ -15,6 +16,7 @@ class AdaptiveIconButton extends AdaptiveWidget<Widget, Widget> {
     this.materialColor,
     this.cupertinoColor,
     this.onClick,
+    this.size = 24,
   });
 
   @override
@@ -23,6 +25,7 @@ class AdaptiveIconButton extends AdaptiveWidget<Widget, Widget> {
       Icon(
         cupertinoIcon,
         color: cupertinoColor,
+        size: size,
       ),
     );
   }
@@ -33,6 +36,7 @@ class AdaptiveIconButton extends AdaptiveWidget<Widget, Widget> {
       Icon(
         materialIcon,
         color: materialColor,
+        size: size,
       ),
     );
   }

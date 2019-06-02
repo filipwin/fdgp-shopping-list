@@ -90,7 +90,11 @@ class _State1 extends AddScreenStateContract {
   Widget uselessSlider() {
     return Slider.adaptive(
       value: sliderValue,
-      onChanged: (newValue) => print,
+      onChanged: (newValue) {
+        setState(() {
+          sliderValue = newValue;
+        });
+      },
     );
   }
 }

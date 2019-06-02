@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
   ///1 - material only
   ///2 - cupertino only
   ///3 - platform-aware custom
-  ///4 - PlatformWidgets lib
   final mode = 3;
 
   @override

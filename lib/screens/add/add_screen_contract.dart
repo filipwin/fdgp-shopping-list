@@ -5,6 +5,7 @@ import 'package:platformfriendlyappv2/utils/util.dart';
 abstract class AddScreenContract extends StatefulWidget {}
 
 abstract class AddScreenStateContract extends State<AddScreenContract> {
+  final vatValues = ['0%', '8%', '23%'];
   final sliderLabel = 'Useless slider';
   final nameHint = 'Name';
   final priceHint = 'Price';
@@ -46,10 +47,19 @@ abstract class AddScreenStateContract extends State<AddScreenContract> {
           Padding(padding: standardInsets, child: priceField()),
           Padding(padding: standardInsets, child: vatPercentagePicker()),
           Padding(padding: standardInsets, child: isPrioritySwitch()),
-          Padding(padding: standardInsets, child: uselessSlider()),
+          Padding(padding: standardInsets, child: _slider()),
           Padding(padding: largerTopInsets, child: buttonsSection()),
         ],
       ),
+    );
+  }
+
+  Widget _slider() {
+    return Row(
+      children: <Widget>[
+        Text(sliderLabel),
+        uselessSlider(),
+      ],
     );
   }
 

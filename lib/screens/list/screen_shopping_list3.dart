@@ -61,7 +61,7 @@ class _State3 extends ShoppingScreenStateContract {
 
   @override
   Route<Product> onAddProductRoute() {
-    return AdaptiveRoute().to(AddProductScreen3());
+    return AdaptiveRoute<Product>().to(AddProductScreen3());
   }
 
   @override
@@ -85,6 +85,8 @@ class _State3 extends ShoppingScreenStateContract {
       materialColor: Colors.red,
       cupertinoIcon: CupertinoIcons.clear,
       cupertinoColor: CupertinoColors.destructiveRed,
+      onClick: () => onDeleteProduct(product),
+      size: 36,
     );
   }
 

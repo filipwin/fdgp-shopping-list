@@ -32,10 +32,8 @@ class AdaptiveTopBar extends AdaptiveWidget<AppBar, CupertinoNavigationBar> impl
   ///'AdaptiveTopBar' is not a subtype of ObstructingPreferredSizeWidget crash.
 
   @override
-  // TODO: implement fullObstruction
-  bool get fullObstruction => false;
+  bool get fullObstruction => true;
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(Platform.isIOS ? 44 : 56);
 }
